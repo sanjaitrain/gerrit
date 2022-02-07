@@ -35,7 +35,10 @@ service:
   externalIPs: []
 
 persistence:
-  enabled: false
+  enabled: true
+  storageClass: standard
+  accessMode: ReadWriteOnce
+  size: 7.5Gi
 
   ## Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -47,7 +50,7 @@ persistence:
   # storageClass: "-"
 
   accessMode: ReadWriteOnce
-  size: 1Gi
+  size: 30Gi
 
 ## For creating the StorageClass automatically:
 storageClass:
@@ -70,10 +73,10 @@ storageClass:
   parameters: {}
 
   mountOptions:
-    - vers=3
+    - vers=4.1
 
   ## ReclaimPolicy field of the class, which can be either Delete or Retain
-  reclaimPolicy: Delete
+  reclaimPolicy: Retain
 
 ## For RBAC support:
 rbac:
@@ -84,12 +87,12 @@ rbac:
   serviceAccountName: default
 
 resources: {}
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
 
 nodeSelector: {}
 
